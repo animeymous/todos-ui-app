@@ -1,0 +1,43 @@
+<div class="parent-table-div">
+    <table *ngIf="lists?.length > 0 && countOfUnCompletedTask > 0; else ifEmpty" class="table-class">
+        <thead>
+            <tr>
+                <th colspan="2">Task</th>
+                <th colspan="2">Created Date</th>
+                <th colspan="2">Due Date</th>
+                <th colspan="2">Priority</th>
+                <th colspan="2">Status</th>
+                <th colspan="3">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let task of lists">
+                <tr (click)="handleTaskClick(task)" *ngIf="task.status !== 'done'">
+                    <td colspan="2">{{ task.task }}</td>
+                    <td colspan="2">{{ task.createdDate | date: 'dd-MM-yyyy' }}</td>
+                    <td colspan="2">{{ task.dueDate | date: 'dd-MM-yyyy' }}</td>
+                    <td colspan="2"[ngClass]="task.priority ? 'high-priority' : 'low-priority'"> {{task.priority ? 'High' : 'Low'}}</td>
+                    <td colspan="2">{{ task.status }}</td>
+                    <td>
+                        <button (click)="editTask(task)">Edit</button>
+                    </td>
+                    <td>
+                        <button (click)="deleteTask(task)">Delete</button>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
+
+<div class="parent-button-div">
+    <div class="child-button-div">
+        <input type="button" (click)="createTaskFn()" id="createTaskFn" name="createTaskFn" value="Create Task" class="child-button-div-input">
+    
+        <input type="button" (click)="completedTaskFn()" id="completedTaskFn" name="completedTaskFn" value="Completed Todos" class="child-button-div-input">
+    </div>
+</div>
+
+<ng-template #ifEmpty>
+    <h2>List is Empty or all task done, Please create task from below button</h2>
+</ng-template>

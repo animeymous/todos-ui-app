@@ -1,0 +1,98 @@
+<div class="parent-div">
+
+  <div *ngIf="!fromEdit" class="from-not-edit">
+    <div>
+      <label for="task">Task Name: </label>
+      <input type="text" id="task" name="task" (change)="taskFn($event)">
+    </div>
+  
+    <br>
+  
+    <div>
+      <label for="status">Please Select Status: </label>
+      <select name="status" id="status" (change)="statusFn($event)">
+        <option value="doing">Doing</option>
+        <option value="done">Done</option>
+        <option value="pending" selected>Pending</option>
+      </select>
+    </div>
+  
+    <br>
+  
+    <div id="toggle-div">
+      <label for="priorityToggle">Please Select Priority:</label>
+      <input type="checkbox" id="priorityToggle" (change)="priorityFn($event)">
+      <label for="priorityToggle" class="toggle-label">
+          <span class="toggle-text">High</span>
+          <span class="toggle-text">Low</span>
+      </label>
+    </div>
+  
+    <br>
+  
+    <div *ngIf="formattedDate">
+      <label for="createdDate">Created Date: </label>
+      <input type="date" id="createdDate" name="createdDate" (change)="createdDateFn($event)" min="{{formattedDate}}">
+  
+      <br>
+      <br>
+  
+      <label for="dueDate">Due Date: </label>
+      <input type="date" id="dueDate" name="dueDate" (change)="dueDateFn($event)">
+    </div>
+  
+    <br>
+  
+    <div>
+      <input type="button" value="Submit" (click)="createOrEditTaskFn()">
+    </div>
+  </div>
+  
+  <div *ngIf="fromEdit" class="from-edit">
+    <div>
+      <label for="task">Task Name: </label>
+      <input type="text" id="task" name="task" (change)="taskFn($event)" [(ngModel)]="task">
+    </div>
+  
+    <br>
+  
+    <div>
+      <label for="status">Please Select Status: </label>
+      <select name="status" id="status" (change)="statusFn($event)" [(ngModel)]="status">
+        <option value="doing">Doing</option>
+        <option value="done">Done</option>
+        <option value="pending" selected>Pending</option>
+      </select>
+    </div>
+  
+    <br>
+
+    <div id="toggle-div">
+      <label for="priorityToggle">Please Select Priority:</label>
+      <input type="checkbox" id="priorityToggle" (change)="priorityFn($event)" [(ngModel)]="priority">
+      <label for="priorityToggle" class="toggle-label">
+          <span class="toggle-text">High</span>
+          <span class="toggle-text">Low</span>
+      </label>
+    </div>
+  
+    <br>
+  
+    <div>
+      <label for="createdDate">Created Date: </label>
+      <input type="date" id="createdDate" name="createdDate" (change)="createdDateFn($event)" [(ngModel)]="createdDate" min="2024-04-24">
+  
+      <br>
+      <br>
+  
+      <label for="dueDate">Due Date: </label>
+      <input type="date" id="dueDate" name="dueDate" (change)="dueDateFn($event)" [(ngModel)]="dueDate">
+    </div>
+  
+    <br>
+  
+    <div>
+      <input type="button" value="Submit" (click)="createOrEditTaskFn()">
+    </div>
+  </div>
+</div>

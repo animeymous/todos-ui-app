@@ -1,0 +1,28 @@
+<div class="parent-table-div">
+    <table *ngIf="lists?.length > 0; else ifEmpty" class="table-class">
+        <thead>
+            <tr>
+                <th colspan="2">Task</th>
+                <th colspan="2">Created Date</th>
+                <th colspan="2">Due Date</th>
+                <th colspan="2">Priority</th>
+                <th colspan="2">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let task of lists">
+                <tr *ngIf="task.status === 'done'">
+                    <td colspan="2">{{ task.task }}</td>
+                    <td colspan="2">{{ task.createdDate | date: 'dd-MM-yyyy' }}</td>
+                    <td colspan="2">{{ task.dueDate | date: 'dd-MM-yyyy' }}</td>
+                    <td colspan="2" [ngClass]="task.priority ? 'high-priority' : 'low-priority'"> {{task.priority ? 'High' : 'Low'}}</td>
+                    <td colspan="2">{{ task.status }}</td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
+
+<ng-template #ifEmpty>
+    <h2>No Task has been completed yet</h2>
+</ng-template>
